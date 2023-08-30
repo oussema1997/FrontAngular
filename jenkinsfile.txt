@@ -13,7 +13,8 @@ pipeline {
                     def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
 
                     withSonarQubeEnv(SONAR_INSTALLATION_NAME) {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.sources=src -Dsonar.login=${withCredentials([string(credentialsId: SONAR_TOKEN_CREDENTIAL_ID, variable: 'SONAR_TOKEN')]) { return ${SONAR_TOKEN} }}"
+                        sh """${scannerHome}/bin/sonar-scanner -Dsonar.sources=src -Dsonar.login=\$(SONAR_TOKEN)"""
+
                     }
                 }
             }
