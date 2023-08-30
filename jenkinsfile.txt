@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SONAR_TOKEN_CREDENTIAL_ID = 'sqa_dcb64cfdc7f7e6c4b8c84cb9bf39faa6c982f45b' // Replace with your credential ID
+        SONAR_TOKEN_CREDENTIAL_ID = 'jenkins' // Replace with your credential ID
         SONAR_INSTALLATION_NAME = 'SonarScanner' // Replace with your SonarQube installation name
     }
 
