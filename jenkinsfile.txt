@@ -1,0 +1,36 @@
+pipeline {
+    agent any
+
+    environment {
+        SONAR_TOKEN_CREDENTIAL_ID = 'sqa_dcb64cfdc7f7e6c4b8c84cb9bf39faa6c982f45b' // Replace with your credential ID
+        SONAR_INSTALLATION_NAME = 'sonarqube-server' // Replace with your SonarQube installation name
+    }
+
+    stages {
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+
+                    withSonarQubeEnv(SONAR_INSTALLATION_NAME) {
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.sources=src -Dsonar.login=${withCredentials([string(credentialsId: SONAR_TOKEN_CREDENTIAL_ID, variable: 'SONAR_TOKEN')]) { return ${SONAR_TOKEN} }}"
+                    }
+                }
+            }
+        }
+
+         stage('Build Angular App') {
+            steps {
+                sh '''
+                    #!/bin/bash
+                    npm install
+                    ng build --prod
+                '''
+            }
+        }
+
+
+
+
+    }
+}
