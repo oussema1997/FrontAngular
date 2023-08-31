@@ -11,9 +11,9 @@ pipeline {
             steps {
                 script {
                     def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                    def SONAR_TOKEN = credentials("${SONAR_TOKEN_CREDENTIAL_ID}")
+                   // def SONAR_TOKEN = credentials("${SONAR_TOKEN_CREDENTIAL_ID}")
                     withSonarQubeEnv(SONAR_INSTALLATION_NAME) {
-                        sh """${scannerHome}bin/linux-x86-64/ -Dsonar.sources=src -Dsonar.login=\$(SONAR_TOKEN)"""
+                        sh """${scannerHome}bin/linux-x86-64/ -Dsonar.sources=src -Dsonar.login=\$(SONAR_TOKEN_CREDENTIAL_ID)"""
 
                     }
                 }
