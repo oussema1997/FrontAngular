@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         SONAR_TOKEN_CREDENTIAL_ID = 'sonar-token' // Replace with your credential ID
-        SONAR_INSTALLATION_NAME = 'SonarQube' // Replace with your SonarQube installation name
+        SONAR_INSTALLATION_NAME = 'SonarScanner' // Replace with your SonarQube installation name
     }
 
     stages {
