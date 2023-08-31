@@ -13,7 +13,7 @@ pipeline {
                     def scannerHome = tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                    // def SONAR_TOKEN = credentials("${SONAR_TOKEN_CREDENTIAL_ID}")
                     withSonarQubeEnv(SONAR_INSTALLATION_NAME) {
-                        sh """${scannerHome}bin/linux-x86-64/sonar.sh -Dsonar.sources=src -Dsonar.login=\$(SONAR_TOKEN_CREDENTIAL_ID)"""
+                        sh """${scannerHome}lib/scanner/sonar-scanner-engine-shaded-9.6.1.59531-all.jar -Dsonar.sources=src -Dsonar.login=\$(SONAR_TOKEN_CREDENTIAL_ID)"""
 
                     }
                 }
